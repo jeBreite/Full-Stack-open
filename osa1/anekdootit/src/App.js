@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
 
+// komponentti, hakee ja näyttää anekdootin, jolla on eniten ääniä
 const MostVotes = ({ anecdotes, votes }) => {
   return (
     <div>
@@ -23,14 +24,19 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
+  // tilamuuttuja, säilyttää valitun anekdootin indeksin
   const [selected, setSelected] = useState(0);
+
+  // Tilamuuttuja, säilyttää äänimäärät anekdooteille
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
 
+  // tapahtumakäsittelijä, vaihtaa valittua anekdootin indeksiä satunnaisesti
   const handleClick = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
   };
 
+  // tapahtumakäsittelijä, lisää äänen valitulle anekdootille taulukkoon
   const handleVote = () => {
     const copy = [...votes];
     copy[selected] += 1;
